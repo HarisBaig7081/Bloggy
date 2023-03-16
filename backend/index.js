@@ -13,8 +13,17 @@ const fs = require("fs");
 // const dotenv = require("dotenv");
 // const connectDatabase = require("./config/database");
 const salt = bcrypt.genSaltSync(10);
+const path = require("path");
 const secret = "RJPOIUYTREDCVBNJGFDXCVBNMKUYTRFDC";
 // dotenv.config({ path: "backend/config/config.env" });
+
+// Static Files
+
+app.use(express.static(path.join(__dirname, "./frontend/build")));
+
+app.get("*", function (req, res) {
+        res.sendFile(path.join(__dirname, "./frontend/build/index.html"));
+})
 
 // Uses
 
